@@ -5,7 +5,7 @@ require 'resque/version'
 require 'time'
 
 module Resque
-  class Server < Sinatra::Base
+  class ServerExtract < Sinatra::Base
     dir = File.dirname(File.expand_path(__FILE__))
 
     module NamespaceMethods
@@ -18,8 +18,8 @@ module Resque
     end
     extend NamespaceMethods
 
-    set :views,  "#{dir}/server/views"
-    set :public, "#{dir}/server/public"
+    set :views,  "#{dir}/views"
+    set :public, "#{dir}/public"
     set :static, true
 
     helpers do
@@ -54,7 +54,7 @@ module Resque
       end
 
       def tabs
-        Resque::Server.tabs
+        Resque::ServerExtract.tabs
       end
 
       def redis_get_size(key)
