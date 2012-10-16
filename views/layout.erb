@@ -11,12 +11,7 @@
 </head>
 <body>
   <div class="header">
-    <ul class='nav'>
-      <% tabs.each do |tab_name| %>
-        <%= tab tab_name %>
-      <% end %>
-    </ul>
-    <form action="/namespace" method="post">
+    <form action="<%= url_path('/namespace') %>" method="post" style="float: right;">
       <select id="namespace">
         <% [Resque::ServerExtract.namespaces, 'resque'].flatten.compact.each do |np| %>
           <% if Resque.redis.namespace == np %>
@@ -28,6 +23,11 @@
       </select>
       <input type="submit" value="go" />
     </form>
+    <ul class='nav'>
+      <% tabs.each do |tab_name| %>
+        <%= tab tab_name %>
+      <% end %>
+    </ul>
   </div>
 
   <% if @subtabs %>

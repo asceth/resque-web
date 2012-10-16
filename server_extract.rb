@@ -168,6 +168,11 @@ module Resque
       end
     end
 
+    post "/namespace" do
+      Resque.redis.namespace = params[:namespace]
+      redirect url_path("/overview")
+    end
+
     post "/queues/:id/remove" do
       Resque.remove_queue(params[:id])
       redirect u('queues')
@@ -235,11 +240,6 @@ module Resque
 
       content_type 'text/html'
       stats.join "\n"
-    end
-
-    post "/namespace" do
-      Resque.redis.namespace = params[:namespace]
-      redirect url_path("/overview")
     end
 
     def resque
