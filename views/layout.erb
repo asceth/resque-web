@@ -16,11 +16,18 @@
         <%= tab tab_name %>
       <% end %>
     </ul>
-    <% if Resque.redis.namespace != :resque %>
-      <abbr class="namespace" title="Resque's Redis Namespace">
-       <%= Resque.redis.namespace %>
-      </abbr>
-    <% end %>
+    <form action="/namespace" method="post">
+      <select id="namespace">
+        <% [Resque::Server.namespaces, 'resque'].flatten.compact.each do |np| %>
+          <% if Resque.redis.namespace == np %>
+            <option value="<%= np %>" selected="selected"><%= np %></option>
+          <% else %>
+            <option value="<%= np %>"><%= np %></option>
+          <% end %>
+        <% end %>
+      </select>
+      <input type="submit" value="go" />
+    </form>
   </div>
 
   <% if @subtabs %>

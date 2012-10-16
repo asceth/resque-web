@@ -8,6 +8,8 @@ module Resque
   class Server < Sinatra::Base
     dir = File.dirname(File.expand_path(__FILE__))
 
+    attr_accessor :namespaces
+
     set :views,  "#{dir}/server/views"
     set :public, "#{dir}/server/public"
     set :static, true
@@ -225,6 +227,11 @@ module Resque
 
       content_type 'text/html'
       stats.join "\n"
+    end
+
+    post "/namespace" do
+      Resque.redis.namespace = params[:namespace]
+      redirect url_path("/overview")
     end
 
     def resque
