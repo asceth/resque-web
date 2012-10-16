@@ -8,7 +8,12 @@ module Resque
   class Server < Sinatra::Base
     dir = File.dirname(File.expand_path(__FILE__))
 
-    attr_accessor :namespaces
+    def namespaces
+      @namespaces || []
+    end
+    def namespaces=(value)
+      @namespaces = value
+    end
 
     set :views,  "#{dir}/server/views"
     set :public, "#{dir}/server/public"
