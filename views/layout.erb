@@ -12,7 +12,7 @@
 <body>
   <div class="header">
     <form action="<%= url_path('/namespace') %>" method="post" style="float: right;">
-      <select id="namespace">
+      <select name="namespace" id="namespace">
         <% [Resque::ServerExtract.namespaces, 'resque'].flatten.compact.each do |np| %>
           <% if Resque.redis.namespace.to_s == np %>
             <option value="<%= np %>" selected="selected"><%= np %></option>
