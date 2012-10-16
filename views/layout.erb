@@ -18,7 +18,7 @@
     </ul>
     <form action="/namespace" method="post">
       <select id="namespace">
-        <% [Resque::Server.namespaces, 'resque'].flatten.compact.each do |np| %>
+        <% [Resque::ServerExtract.namespaces, 'resque'].flatten.compact.each do |np| %>
           <% if Resque.redis.namespace == np %>
             <option value="<%= np %>" selected="selected"><%= np %></option>
           <% else %>
